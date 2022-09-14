@@ -47,7 +47,8 @@ class SegSocial
         $data_provincias = [];
         $data_provincias = $data->each(function ($node) {
             $tmp_array = [];
-            $tmp_array['ID'] =  $node->attr('value');
+            $tmp_array['id'] =  explode('#', $node->attr('value'))[0];
+            $tmp_array['code'] =  $node->attr('value');
             $tmp_array['name'] = $node->text();
             return  $tmp_array;
         });
@@ -63,7 +64,7 @@ class SegSocial
         foreach ($provinces as $province) {
             $response =  $this->client_calendario_laboral->request('POST', $this->POST_URL, [
                 'form_params' => [
-                    'Provincia' => $province['ID']
+                    'Provincia' => $province['code']
                 ]
             ]);
 
@@ -76,9 +77,10 @@ class SegSocial
             $this->POST_URL .=  $crawler->filter('#provinciasLocalidades')->attr('action');
 
             $data = $crawler->filter('#Localidades > option');
-            $locations_array[$province['ID']] = $data->each(function ($node) {
+            $locations_array[$province['id']] = $data->each(function ($node) {
                 $tmp_array = [];
-                $tmp_array['ID'] =  $node->attr('value');
+                $tmp_array['id'] =  explode(' #', $node->attr('value'))[0];
+                $tmp_array['code'] =  $node->attr('value');
                 $tmp_array['name'] = $node->text();
                 return  $tmp_array;
             });
@@ -93,7 +95,7 @@ class SegSocial
 
         if (empty($this->POST_URL)) {
             $this->getProvinces();
-            $this->getLocations([['ID' => $province]]);
+            $this->getLocations([['code' => $province]]);
         }
 
         $response =  $this->client_calendario_laboral->request('POST', $this->POST_URL, [
