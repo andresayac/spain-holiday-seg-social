@@ -8,8 +8,8 @@ Gracias a este scraper es posible realizar la validación si un dia es feriado e
 
 ## 📌 Installation
 ```
-$ git clone https://github.com/andresayac/spain-holiday.git
-$ cd spain-holiday
+$ git clone https://github.com/andresayac/spain-holiday-seg-social.git
+$ cd spain-holiday-seg-social
 $ composer install
 ```
 
