@@ -83,8 +83,7 @@ class SegSocial
                 return  $tmp_array;
             });
 
-            /* file_put_contents("prueba.html", $contents);
-            exit; */
+            // file_put_contents("prueba.html", $contents);
         }
         return $locations_array;
     }
@@ -110,7 +109,7 @@ class SegSocial
 
         $crawler = new Crawler($contents);
 
-        file_put_contents("prueba.html", $contents);
+        // file_put_contents("prueba.html", $contents);
 
         $data = $crawler->filter('.table-responsive > table');
 
@@ -120,7 +119,7 @@ class SegSocial
             $tmp_array[$month] = $node->filter('tr > td')->each(function ($node) {
                 $day = $node->text();
                 $holiday_description = $node->attr('aria-label');
-                $holiday_type =  $this->clearString(['datepicker-day ', 'fest-auto ', ' ','fest-loc4'], $node->attr('class'));
+                $holiday_type =  $this->clearString(['datepicker-day ', 'fest-auto ', ' ', 'fest-loc4'], $node->attr('class'));
 
                 $tmp_array = [];
 
