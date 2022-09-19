@@ -1,7 +1,4 @@
 <?php
-# Dependencies
-require 'vendor/autoload.php';
-
 
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
@@ -33,6 +30,7 @@ class SegSocial
             'headers' => $this->headers
         ]);
 
+        
         if ($response->getStatusCode() != 200) return [];
 
         $contents = $response->getBody()->getContents();
