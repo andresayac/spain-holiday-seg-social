@@ -2,6 +2,8 @@
 
 
 require 'inc/SegSocial.class.php';
+# Dependencies
+require 'vendor/autoload.php';
 
 $scraper = new SegSocial();
 
@@ -21,7 +23,7 @@ var_dump($locations);
  * get list of holidays of the selected province
  */
 
-$holidays = $scraper->getHolidays('28#Madrid', '280920000 #MOSTOLES');
+$holidays = $scraper->getHolidays('08#Barcelona', '081240000 #MOLLET DEL VALLES');
 var_dump($holidays);
 
 
