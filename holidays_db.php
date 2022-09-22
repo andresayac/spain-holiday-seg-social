@@ -18,9 +18,10 @@ foreach ($provinces as  $province) {
 foreach ($provinces as $province) {
     $locations = $scraper->getLocations([$province]); // return array
     foreach ($locations  as $key => $location) {
+        $defaul_province = ['id' => $province['id'], 'code' => '000', 'name' => 'Default'];
+        array_unshift($location, $defaul_province);
         foreach ($location as $location_data) {
             $database->query("INSERT INTO locations (id, name, code, province_id) VALUES({$location_data['id']}, '{$location_data['name']}', '{$location_data['code']}', {$province['id']});");
-
             $holidays_data = $scraper->getHolidays($province['code'], $location_data['code']);
 
             foreach ($holidays_data as $holiday_data) {
@@ -29,8 +30,3 @@ foreach ($provinces as $province) {
         }
     }
 }
-
-
-
-
-$holidays = $scraper->getHolidays('28#Madrid', '280920000 #MOSTOLES');
