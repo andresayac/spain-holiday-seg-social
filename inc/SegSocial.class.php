@@ -30,7 +30,7 @@ class SegSocial
             'headers' => $this->headers
         ]);
 
-        
+
         if ($response->getStatusCode() != 200) return [];
 
         $contents = $response->getBody()->getContents();
@@ -119,7 +119,7 @@ class SegSocial
             $tmp_array[$month] = $node->filter('tr > td')->each(function ($node) {
                 $day = $node->text();
                 $holiday_description = $node->attr('aria-label');
-                $holiday_type =  $this->clearString(['datepicker-day ', 'fest-auto ', ' ', 'fest-loc4'], $node->attr('class'));
+                $holiday_type =  trim($this->clearString(['datepicker-day ', 'fest-auto ', 'fest-loc4', ' '], $node->attr('class')));
 
                 $tmp_array = [];
 
